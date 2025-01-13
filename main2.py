@@ -56,8 +56,8 @@ class Uznemums:
             print(organisations)
         v=input('Vai gribat atjaunot uzņēmuma telefona numuru?(jā/nē) ')
         if v=='jā':
-            x=input('Ievadi uzņēmuma ID,kuru ir jāsameklē:')
-            cursor.execute(f"""UPDATE Uznemums SET tel_num WHERE id_uznemuma={x}""")
+            x=input('Ievadi jaunu telefona numuru:')
+            cursor.execute(f"""UPDATE Uznemums set tel_num=? WHERE id_uznemuma=?""",(x,e))
             conn.commit()
         else:
             pass
