@@ -113,6 +113,8 @@ def main():
 
 main()
 
+
+
 """
 
 uzņ1=Uzņēmums("UNAGI sushi shop","Atbrīvošanas aleja 111,Rēzekne","unagisushi@inbox.lv",28689903) 
