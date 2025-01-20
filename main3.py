@@ -27,7 +27,7 @@ def pievienot_uznemumu():
 
     logs = tk.Toplevel()
     logs.title("Pievienot uzņēmumu")
-    logs.geometry("300x300")
+    logs.geometry("300x300+250+400")
 
     tk.Label(logs, text="Nosaukums:").pack()
     nosaukums_entry = tk.Entry(logs)
@@ -60,12 +60,13 @@ def meklēt_uznemumu():
     def atrast_uznemumu():
         nosaukums = nosaukums_entry.get()
         if nosaukums:
-            cursor.execute("SELECT * FROM Uzņēmumi WHERE nosaukums LIKE ?", (f"%{nosaukums}%",))
+            cursor.execute("SELECT * FROM Uznemums WHERE nosaukums LIKE ?", (f"%{nosaukums}%",))
             rezultati = cursor.fetchall()
             if rezultati:
                 rezultati_str = ""
                 for r in rezultati:
-                    rezultati_str += f"{r[0]}: {r[1]} {r[2]}, {r[3]}, {r[4]}, {r[5]}, {r[6]}, {r[7]}\n"
+                    rezultati_str += f"{r[0]}: {r[1]} {r[2]}, {r[3]}, {r[4]}, {r[5]}, {r[6]}\n"
+                    tk.Label(logs, text=f"{r[0]}: {r[1]} {r[2]},\n {r[3]}, {r[4]}, {r[5]}, {r[6]}").pack()
             else:
                 messagebox.showinfo("Rezultāti", "Netika atrasts neviens uzņēmums.")
         else:
@@ -73,7 +74,7 @@ def meklēt_uznemumu():
 
     logs = tk.Toplevel()
     logs.title("Meklēt uzņēmumu")
-    logs.geometry("300x200")
+    logs.geometry("300x200+250+400")
 
     tk.Label(logs, text="Uzņēmuma nosaukums:").pack()
     nosaukums_entry = tk.Entry(logs)
@@ -96,7 +97,7 @@ def dzēst_uznemumu():
 
     logs = tk.Toplevel()
     logs.title("Dzēst uzņēmumu")
-    logs.geometry("300x150")
+    logs.geometry("300x150+250+400")
 
     tk.Label(logs, text="Uzņēmuma ID:").pack()
     id_uznemuma_entry = tk.Entry(logs)
@@ -109,7 +110,7 @@ def dzēst_uznemumu():
 def uznemumu_logs():
     uznemumi_logs = tk.Toplevel()
     uznemumi_logs.title("Uzņēmumu pārvaldība")
-    uznemumi_logs.geometry("300x250")
+    uznemumi_logs.geometry("300x250+600+600")
 
     pievienot_btn = tk.Button(uznemumi_logs, text="Pievienot uzņēmumu", command=pievienot_uznemumu, width=25, height=2, bg="lightblue")
     pievienot_btn.pack(pady=10)
@@ -142,7 +143,7 @@ def pievienot_pilsetu():
 
     logs = tk.Toplevel()
     logs.title("Pievienot pilsētu")
-    logs.geometry("300x300")
+    logs.geometry("300x150+100+600")
 
     tk.Label(logs, text="Pilsēta:").pack()
     pilsetas_nos_entry = tk.Entry(logs)
@@ -173,7 +174,7 @@ def meklēt_pilsetu():
 
     logs = tk.Toplevel()
     logs.title("Meklēt pilsētu")
-    logs.geometry("300x200")
+    logs.geometry("300x150+100+600")
 
     tk.Label(logs, text="Pilsēta:").pack()
     pilsetas_nos_entry = tk.Entry(logs)
@@ -196,7 +197,7 @@ def dzēst_pilsetu():
 
     logs = tk.Toplevel()
     logs.title("Dzēst pilsētu")
-    logs.geometry("300x150")
+    logs.geometry("300x150+100+600")
 
     tk.Label(logs, text="Pilsētas ID:").pack()
     id_pilsetas_entry = tk.Entry(logs)
@@ -209,7 +210,7 @@ def dzēst_pilsetu():
 def pilsetu_logs():
     pilsētas_logs = tk.Toplevel()
     pilsētas_logs.title("Pilsētu pārvaldība")
-    pilsētas_logs.geometry("300x250")
+    pilsētas_logs.geometry("300x250+500+500")
 
     pievienot_btn = tk.Button(pilsētas_logs, text="Pievienot pilsētu", command=pievienot_pilsetu, width=25, height=2, bg="lightblue")
     pievienot_btn.pack(pady=10)
@@ -226,19 +227,19 @@ def pilsetu_logs():
 
 def izveidot_galveno_logu():
     def uznemumi_poga():
-        pievienot_uznemumu()
+        #pievienot_uznemumu()
         uznemumu_logs()
         #messagebox.showinfo("Uzņēmums", "Atvērta uzņēmumu pārvaldība.")
 
     def pilsetas_poga():
-        pievienot_pilsetu()
+        #pievienot_pilsetu()
         pilsetu_logs()
         #messagebox.showinfo("Pilsētas", "Atvērta pilsētu pārvaldība.")
 
 
     logs = tk.Tk()
     logs.title("Suši bāru pārvaldība")
-    logs.geometry("300x200")
+    logs.geometry("300x200+100+50")
 
     uznemumi_btn = tk.Button(logs, text="Uzņēmumi", command=uznemumi_poga, width=20, height=2, bg="lightblue")
     uznemumi_btn.pack(pady=20)
