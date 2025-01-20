@@ -1,6 +1,7 @@
 import sqlite3
 import tkinter as tk
 from tkinter import messagebox
+import re
 
 conn = sqlite3.connect('06.12_pd.db')
 cursor = conn.cursor()
@@ -11,13 +12,13 @@ def pievienot_uznemumu():
         adrese = adrese_entry.get()
         e_pasts = e_pasts_entry.get()
         tel_num = tel_num_entry.get()
-        id_pilsetas = id_pilsetas_entry.get()
-        id_logo = id_logo_entry.get()
+        pilsetas_nos= pilsetas_nos_entry.get()
+        logo_veids = logo_veids_entry.get()
 
-        if nosaukums and id_pilsetas:
+        if nosaukums:
             cursor.execute(
-                "INSERT INTO Uznemums (nosaukums, adrese, e_pasts, tel_num,id_pilsetas,id_logo) VALUES (?, ?, ?, ?, ?,?)",
-                (nosaukums, adrese, e_pasts, tel_num,int(id_pilsetas),int(id_logo))
+                "INSERT INTO Uznemums (nosaukums, adrese, e_pasts, tel_num,pilsetas_nos,logo_veids) VALUES (?, ?, ?, ?, ?,?)",
+                (nosaukums, adrese, e_pasts, tel_num,pilsetas_nos,logo_veids)
             )
             conn.commit()
             messagebox.showinfo("Veiksmīgi", "Uzņēmums pievienots!")
@@ -45,13 +46,13 @@ def pievienot_uznemumu():
     tel_num_entry = tk.Entry(logs)
     tel_num_entry.pack()
 
-    tk.Label(logs, text="Pilsētas ID:").pack()
-    id_pilsetas_entry = tk.Entry(logs)
-    id_pilsetas_entry.pack()
+    tk.Label(logs, text="Pilsēta:").pack()
+    pilsetas_nos_entry = tk.Entry(logs)
+    pilsetas_nos_entry.pack()
 
-    tk.Label(logs, text="Logo ID:").pack()
-    id_logo_entry = tk.Entry(logs)
-    id_logo_entry.pack()
+    tk.Label(logs, text="Logo veids:").pack()
+    logo_veids_entry = tk.Entry(logs)
+    logo_veids_entry.pack()
 
     saglabat_btn = tk.Button(logs, text="Saglabāt", command=saglabat_uznemumu)
     saglabat_btn.pack(pady=10)
@@ -225,6 +226,39 @@ def pilsetu_logs():
     iziet_btn.pack(pady=10)
 
 
+
+
+def meklēt_uzn_info():
+    def atrast_uzn_info():
+        nosaukums= nosaukums_entry.get()
+        if nosaukums:
+            cursor.execute("SELECT nosaukums, adrese,e_pasts, tel_num, pilsetas_nos, logo_veids FROM Uznemums INNER JOIN Pilsetas ON Pilsetas.id_pilsetas=Uznemums.id_pilsetas  INNER JOIN Logo ON Logo.id_logo=Uznemums.id_logo")
+            rezultati = cursor.fetchall()
+            
+            if rezultati:
+                rezultati_str = ""
+                for r in rezultati:
+                    rezultati_str += f"{r[0]} ,{r[1]}, {r[2]}, {r[3]}, {r[4]}, {r[5]}\n"
+                    messagebox.showinfo("Meklēšanas rezultāti", f"{r[0]}, {r[1]} , {r[2]}, {r[3]}, {r[4]},{r[5]}\n")
+            else:
+                messagebox.showinfo("Rezultāti", "Netika atrasts neviens uzņēmums.")
+        else:
+            messagebox.showerror("Kļūda", "Lūdzu, ievadiet uzņēmuma nosaukumu!")
+
+    logs = tk.Toplevel()
+    logs.title("Meklēt uzņēmuma info")
+    logs.geometry("300x150+500+300")
+
+    tk.Label(logs, text="Uzņēmuma nosaukums:").pack()
+    nosaukums_entry = tk.Entry(logs)
+    nosaukums_entry.pack()
+
+    meklēt_btn = tk.Button(logs, text="Meklēt", command=atrast_uzn_info)
+    meklēt_btn.pack(pady=10)
+                    
+
+
+
 def izveidot_galveno_logu():
     def uznemumi_poga():
         #pievienot_uznemumu()
@@ -235,17 +269,22 @@ def izveidot_galveno_logu():
         #pievienot_pilsetu()
         pilsetu_logs()
         #messagebox.showinfo("Pilsētas", "Atvērta pilsētu pārvaldība.")
+    def uzn_info_poga():
+        meklēt_uzn_info()
 
 
     logs = tk.Tk()
     logs.title("Suši bāru pārvaldība")
-    logs.geometry("300x200+100+50")
+    logs.geometry("300x300+100+50")
 
     uznemumi_btn = tk.Button(logs, text="Uzņēmumi", command=uznemumi_poga, width=20, height=2, bg="lightblue")
     uznemumi_btn.pack(pady=20)
 
     pilsetas_btn = tk.Button(logs, text="Pilsētas", command=pilsetas_poga, width=20, height=2, bg="lightgreen")
     pilsetas_btn.pack(pady=20)
+
+    uzn_info_btn = tk.Button(logs, text="Uzņēmuma informācija", command=uzn_info_poga, width=20, height=2, bg="yellow")
+    uzn_info_btn.pack(pady=20)
 
     logs.mainloop()
 
