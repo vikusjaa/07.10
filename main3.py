@@ -89,7 +89,7 @@ def dzēst_uznemumu():
     def dzēst_uznemumu_no_db():
         id_uznemuma = id_uznemuma_entry.get()
         if id_uznemuma.isdigit():
-            cursor.execute("DELETE FROM Uzņēmumi WHERE id_uznemuma = ?", (id_uznemuma,))
+            cursor.execute("DELETE FROM Uznemums WHERE id_uznemuma = ?", (id_uznemuma,))
             conn.commit()
             messagebox.showinfo("Veiksmīgi", f"Uzņēmums ar ID {id_uznemuma} tika izdzēsts!")
             logs.destroy()
@@ -113,13 +113,13 @@ def uznemumu_logs():
     uznemumi_logs.title("Uzņēmumu pārvaldība")
     uznemumi_logs.geometry("300x250+600+600")
 
-    pievienot_btn = tk.Button(uznemumi_logs, text="Pievienot uzņēmumu", command=pievienot_uznemumu, width=25, height=2, bg="lightblue")
+    pievienot_btn = tk.Button(uznemumi_logs, text="Pievienot uzņēmumu", command=pievienot_uznemumu, width=25, height=2, bg="plum")
     pievienot_btn.pack(pady=10)
 
-    meklēt_btn = tk.Button(uznemumi_logs, text="Meklēt uzņēmumu", command=meklēt_uznemumu, width=25, height=2, bg="lightgreen")
+    meklēt_btn = tk.Button(uznemumi_logs, text="Meklēt uzņēmumu", command=meklēt_uznemumu, width=25, height=2, bg="violet")
     meklēt_btn.pack(pady=10)
 
-    dzēst_btn = tk.Button(uznemumi_logs, text="Dzēst uzņēmumu", command=dzēst_uznemumu, width=25, height=2, bg="lightyellow")
+    dzēst_btn = tk.Button(uznemumi_logs, text="Dzēst uzņēmumu", command=dzēst_uznemumu, width=25, height=2, bg="orchid")
     dzēst_btn.pack(pady=10)
 
     iziet_btn = tk.Button(uznemumi_logs, text="Iziet", command=uznemumu_logs.destroy, width=25, height=2, bg="red", fg="white")
@@ -169,9 +169,9 @@ def meklēt_pilsetu():
                 for r in rezultati:
                     rezultati_str += f"{r[0]}: {r[1]}, {r[2]}\n"
             else:
-                messagebox.showinfo("Rezultāti", "Netika atrasts neviens treneris.")
+                messagebox.showinfo("Rezultāti", "Netika atrasts neviena pilsēta.")
         else:
-            messagebox.showerror("Kļūda", "Lūdzu, ievadiet trenera vārdu!")
+            messagebox.showerror("Kļūda", "Lūdzu, ievadiet pilsētas nosaukumu!")
 
     logs = tk.Toplevel()
     logs.title("Meklēt pilsētu")
@@ -213,13 +213,13 @@ def pilsetu_logs():
     pilsētas_logs.title("Pilsētu pārvaldība")
     pilsētas_logs.geometry("300x250+500+500")
 
-    pievienot_btn = tk.Button(pilsētas_logs, text="Pievienot pilsētu", command=pievienot_pilsetu, width=25, height=2, bg="lightblue")
+    pievienot_btn = tk.Button(pilsētas_logs, text="Pievienot pilsētu", command=pievienot_pilsetu, width=25, height=2, bg="powderblue")
     pievienot_btn.pack(pady=10)
 
-    meklēt_btn = tk.Button(pilsētas_logs, text="Meklēt pilsētu", command=meklēt_pilsetu, width=25, height=2, bg="lightgreen")
+    meklēt_btn = tk.Button(pilsētas_logs, text="Meklēt pilsētu", command=meklēt_pilsetu, width=25, height=2, bg="skyblue")
     meklēt_btn.pack(pady=10)
 
-    dzēst_btn = tk.Button(pilsētas_logs, text="Dzēst pilsētu", command=dzēst_pilsetu, width=25, height=2, bg="lightyellow")
+    dzēst_btn = tk.Button(pilsētas_logs, text="Dzēst pilsētu", command=dzēst_pilsetu, width=25, height=2, bg="steelblue")
     dzēst_btn.pack(pady=10)
 
     iziet_btn = tk.Button(pilsētas_logs, text="Iziet", command=pilsetu_logs.destroy, width=25, height=2, bg="red", fg="white")
@@ -277,13 +277,13 @@ def izveidot_galveno_logu():
     logs.title("Suši bāru pārvaldība")
     logs.geometry("300x300+100+50")
 
-    uznemumi_btn = tk.Button(logs, text="Uzņēmumi", command=uznemumi_poga, width=20, height=2, bg="lightblue")
+    uznemumi_btn = tk.Button(logs, text="Uzņēmumi", command=uznemumi_poga, width=20, height=2, bg="thistle")
     uznemumi_btn.pack(pady=20)
 
-    pilsetas_btn = tk.Button(logs, text="Pilsētas", command=pilsetas_poga, width=20, height=2, bg="lightgreen")
+    pilsetas_btn = tk.Button(logs, text="Pilsētas", command=pilsetas_poga, width=20, height=2, bg="lightskyblue")
     pilsetas_btn.pack(pady=20)
 
-    uzn_info_btn = tk.Button(logs, text="Uzņēmuma informācija", command=uzn_info_poga, width=20, height=2, bg="yellow")
+    uzn_info_btn = tk.Button(logs, text="Uzņēmuma informācija", command=uzn_info_poga, width=20, height=2, bg="khaki")
     uzn_info_btn.pack(pady=20)
 
     logs.mainloop()
