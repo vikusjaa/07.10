@@ -14,6 +14,10 @@ def pievienot_uznemumu():
         tel_num = tel_num_entry.get()
         pilsetas_nos= pilsetas_nos_entry.get()
         logo_veids = logo_veids_entry.get()
+        pattern=r'^[A-ZĀ-Ž][a-zA-Z][a-zā-ž][a-zA-Z][a-zā-ž]|[A-ZĀ-Ž][a-zA-Z\s][a-zA-Z][a-zā-ž\s][a-zA-Z][a-zā-ž\s]+$'
+
+        if not re.match(pattern, nosaukums):
+             messagebox.showerror("Rezultāts", "Nosaukums nav derīgs!")
 
         if nosaukums:
             cursor.execute(
