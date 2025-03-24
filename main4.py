@@ -57,6 +57,7 @@ def pievienot_uznemumu():
     saglabat_btn = tk.Button(logs, text="Saglabāt", command=saglabat_uznemumu)
     saglabat_btn.pack(pady=10)
 
+
 def meklēt_uznemumu():
     def atrast_uznemumu():
         nosaukums = nosaukums_entry.get()
@@ -224,8 +225,6 @@ def pilsetu_logs():
 
     iziet_btn = tk.Button(pilsētas_logs, text="Iziet", command=pilsetu_logs.destroy, width=25, height=2, bg="red", fg="white")
     iziet_btn.pack(pady=10)
-
-
 
 
 def meklēt_uzn_info():

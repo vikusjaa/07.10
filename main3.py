@@ -26,7 +26,7 @@ def pievienot_uznemumu():
         if not re.match(pattern1, adrese):
              messagebox.showerror("Rezultāts", "Adrese nav derīga!")
 
-        #if not re.match(pattern2, e_pasts):
+        if not re.match(pattern2, e_pasts):
              messagebox.showerror("Rezultāts", "Ē-pasts nav derīgs!")
               
         if not re.match(pattern3, pilsetas_nos):
@@ -243,8 +243,6 @@ def pilsetu_logs():
     iziet_btn.pack(pady=10)
 
 
-
-
 def meklēt_uzn_info():
     def atrast_uzn_info():
         nosaukums= nosaukums_entry.get()
@@ -274,8 +272,6 @@ def meklēt_uzn_info():
     meklēt_btn.pack(pady=10)
                     
 
-
-
 def izveidot_galveno_logu():
     def uznemumi_poga():
         #pievienot_uznemumu()
@@ -288,7 +284,6 @@ def izveidot_galveno_logu():
         #messagebox.showinfo("Pilsētas", "Atvērta pilsētu pārvaldība.")
     def uzn_info_poga():
         meklēt_uzn_info()
-
 
     logs = tk.Tk()
     logs.title("Suši bāru pārvaldība")

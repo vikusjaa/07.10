@@ -1,11 +1,10 @@
 import itertools
 import sqlite3
 
-
 conn=sqlite3.connect('06.12_pd.db')
 cursor=conn.cursor()
-class Uznemums:
 
+class Uznemums:
     Uznemuma_nosaukums=""
     Uznemuma_adrese=""
     Uznemuma_e_pasts=""
@@ -33,7 +32,8 @@ class Uznemums:
         pils_id=int(input("Ievadi pilsētas ID:"))
         logo_id=int(input("Ievadi logo ID:"))
 
-        cursor.execute('''INSERT INTO Uznemums (id_uznemuma,nosaukums,adrese,e_pasts,tel_num,id_pilsetas,id_logo)VALUES (?,?,?,?,?,?,?)''',(uzn_id,uzn_nos, uzn_adr,uzn_e_pasts,uzn_tel_num,pils_id,logo_id))
+        cursor.execute('''INSERT INTO Uznemums (id_uznemuma,nosaukums,adrese,e_pasts,tel_num,id_pilsetas,id_logo)VALUES (?,?,?,?,?,?,?)''',
+                       (uzn_id,uzn_nos, uzn_adr,uzn_e_pasts,uzn_tel_num,pils_id,logo_id))
         print("Uzņēmums pievienots!")
         conn.commit()
 
@@ -79,8 +79,6 @@ class Pilseta:
         self.Pilsetas_nosaukums= pils_nos
         self.Pilsetas_uzn_skaits= pils_uzn_sk
         
-       
-
     def Pilsetas_info(self):
         return[
             self.Pilsetas_nosaukums, self.Pilsetas_uzn_skaits
@@ -114,30 +112,3 @@ def main():
 main()
 
 
-
-"""
-
-uzņ1=Uzņēmums("UNAGI sushi shop","Atbrīvošanas aleja 111,Rēzekne","unagisushi@inbox.lv",28689903) 
-uzņ2=Uzņēmums("Sushi Li","Atbrīvošanas aleja 81,Rēzekne","sushililatvija@gmail.com",25744425)
-
-print(uzņ1.Uzņēmuma_id)
-uzņ1.Uzņēmuma_info()
-uzņ1.Uzņēmuma_info_print()
-print(uzņ2.Uzņēmuma_id)
-uzņ2.Uzņēmuma_info()
-uzņ2.Uzņēmuma_info_print()
-
-
-pak1=Pilseeta('Rīga',20)
-pak2=Pilseeta('Daugavpils',4)
-pak3=Pilseeta('Jelgava',6)
-
-print(pak1.Pilseetas_id)
-pak1.Pilseetas_info()
-pak1.Pilseetas_info_print()
-print(pak2.Pilseetas_id)
-pak2.Pilseetas_info()
-pak2.Pilseetas_info_print()
-print(pak3.Pilseetas_id)
-pak3.Pilseetas_info()
-pak3.Pilseetas_info_print()"""

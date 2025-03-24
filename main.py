@@ -41,7 +41,6 @@ print(uzņ3.Uzņēmuma_id)
 uzņ3.Uzņēmuma_info()
 uzņ3.Uzņēmuma_info_print()
 
-
 class Pakalpojums:
     Pakalpojuma_uzņēmums=""
     Pakalpojumu_veidi=""
@@ -53,7 +52,6 @@ class Pakalpojums:
         self.Pakalpojuma_uzņēmums= pak_uzņ
         self.Pakalpojumu_veidi= pak_veid
        
-
     def Pakalpojuma_info(self):
         return[
             self.Pakalpojuma_uzņēmums, self.Pakalpojumu_veidi
